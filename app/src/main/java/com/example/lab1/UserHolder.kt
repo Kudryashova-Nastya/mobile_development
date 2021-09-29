@@ -30,13 +30,25 @@ object UserHolder {
     }
 
 
-//    fun registerUserByPhone(fullName: String, rawPhone: String): User {
-//        TODO()
-//    }
+    fun registerUserByPhone(fullName: String, rawPhone: String): User = User.makeUser(fullName, phone = rawPhone)
+        .also { user ->
+            if (map.containsKey(user.phone)) throw IllegalArgumentException("A user with this phone already exists")
+            if (cleanPhone(rawPhone).matches("^\\+?[0-9]{3}-?[0-9]{6,12}\$".toRegex())) map[user.login] = user
+            else throw IllegalArgumentException("Phone is incorrect")
+        }
 
-//    fun requestAccessCode(login: String) {
-//        TODO()
-//    }
+    fun requestAccessCode(login: String) {
+        val phone = cleanPhone(login)
+        val user = map[phone];
+        if (user != null) {
+            val accessCode = user.generateAccessCode()
+            user.passwordHash = user.encrypt(accessCode)
+            user.accessCode = accessCode;
+            user.sendAccessCodeToUser(phone,accessCode)
+            map[phone] = user
+        }
+    }
+
 
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)
     fun clearHolder() {

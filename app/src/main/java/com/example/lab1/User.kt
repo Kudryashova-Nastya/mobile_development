@@ -1,4 +1,4 @@
-package com.example.firstlesson
+package com.example.lab1
 
 import androidx.annotation.VisibleForTesting
 import java.math.BigInteger
