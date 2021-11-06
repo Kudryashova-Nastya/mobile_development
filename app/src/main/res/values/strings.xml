@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">hw4</string>
+    <string name="headerText">Личности</string>
+    <string name="gender">Гендер</string>
+    <string name="info">Описание личности</string>
+    <string name="date">Годы жизни</string>
+    <string name="name">Имя</string>
+</resources>
