@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.hw5.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), TaskCallbacks {
@@ -14,9 +16,12 @@ class MainActivity : AppCompatActivity(), TaskCallbacks {
         const val RESULT = "RESULT"
     }
 
+    private val verticalLinearLayoutManager: LinearLayoutManager =
+        LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+
     private lateinit var binding: ActivityMainBinding
     private var fragment: MyFragment? = null
-    private var myResult: Int = 0
+    private var myResult: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,13 +50,23 @@ class MainActivity : AppCompatActivity(), TaskCallbacks {
         }
 
         fragment?.startTask()
+        setupRecyclerView()
+    }
 
+    private fun setupRecyclerView() {
+        binding.itemPerson.layoutManager = verticalLinearLayoutManager
+        binding.itemPerson.adapter = Adapter(Holder.createCollection("MY_MESSAGE"))
+    }
+
+    private fun update(mes: String) {
+        binding.itemPerson.layoutManager = verticalLinearLayoutManager
+        binding.itemPerson.adapter = Adapter(Holder.createCollection(mes))
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putBoolean(PROGRESS_IS_SHOWING, binding.progress.isVisible)
-        outState.putInt(RESULT, myResult)
+        outState.putString(RESULT, myResult)
     }
 
     override fun onBackPressed() {
@@ -69,11 +84,12 @@ class MainActivity : AppCompatActivity(), TaskCallbacks {
     }
 
     override fun onCanceled() {
-        Log.d("MY TAG", "CANCELLED")
+        Log.d("TAG", "CANCELLED")
     }
 
-    override fun onPostExecute(i: Int) {
+    override fun onPostExecute(i: String) {
         myResult = i
-        Log.d("MY TAG", "MESSAGE = $i")
+        Log.d("TAG2", "MESSAGE =  $i")
+        update(i)
     }
 }

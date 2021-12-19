@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit
 interface TaskCallbacks {
     fun onPreExecuted()
     fun onCanceled()
-    fun onPostExecute(i: Int)
+    fun onPostExecute(i: String)
 }
 
 class MyFragment : Fragment() {
@@ -24,6 +24,7 @@ class MyFragment : Fragment() {
     private var callbacks: TaskCallbacks? = null
     private var task: MyTask? = null
     private var handler: Handler? = null
+    private var currentMessage: Int = 0  // счётчик нужен для нумерования сообщений
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,10 +43,11 @@ class MyFragment : Fragment() {
     }
 
     fun startTask() {
-        task = myTask()
+        task = MyTask()
         val handlerCallback: Handler.Callback = object : Handler.Callback {
+
             override fun handleMessage(message: Message): Boolean {
-                callbacks?.onPostExecute(message.what)
+                callbacks?.onPostExecute("Message №${message.what}")
                 return false
             }
         }
@@ -58,7 +60,7 @@ class MyFragment : Fragment() {
         task?.cancel(true)
     }
 
-    inner class MyTask : AsyncTask<Unit, Int, Unit>() {
+    inner class MyTask : AsyncTask<Unit, String, Unit>() {
 
         override fun onPreExecute() {
             callbacks?.onPreExecuted()
@@ -66,10 +68,10 @@ class MyFragment : Fragment() {
 
 
         override fun doInBackground(vararg p0: Unit?) {
-            Log.d("MY_TAG", "start task")
+            Log.d("TAG1", "start task")
             try {
-                for (i in 0..3) {
-                    TimeUnit.SECONDS.sleep(1)
+                for (i in 1..2) {
+                    TimeUnit.SECONDS.sleep(2)
                     if (isCancelled) break
                 }
             } catch (e: InterruptedException) {
@@ -83,8 +85,11 @@ class MyFragment : Fragment() {
 
         override fun onPostExecute(result: Unit?) {
             callbacks?.let {
-                handler?.sendEmptyMessage(1)
-                handler?.sendEmptyMessageDelayed(2, 2000)
+                for (i in 0..4) {
+                    currentMessage++
+                    handler?.sendEmptyMessageDelayed(currentMessage, 2000)
+//                    handler?.sendEmptyMessage(currentMessage)
+                }
             }
         }
     }
