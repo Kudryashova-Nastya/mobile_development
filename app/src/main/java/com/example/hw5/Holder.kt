@@ -7,9 +7,6 @@ object Holder {
 
     private val persons = mutableListOf<Person>()
 
-    init {
-        persons.add(Person("сообщение один"))
-    }
 
     fun createCollection(mes: String): MutableList<Person> {
 

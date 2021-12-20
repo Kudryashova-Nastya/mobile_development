@@ -60,17 +60,18 @@ class MyFragment : Fragment() {
         task?.cancel(true)
     }
 
-    inner class MyTask : AsyncTask<Unit, String, Unit>() {
+    inner class MyTask : AsyncTask<Unit, Int, Unit>() {
 
         override fun onPreExecute() {
             callbacks?.onPreExecuted()
         }
 
-
+        // По какой-то причине выполняется дважды...
         override fun doInBackground(vararg p0: Unit?) {
             Log.d("TAG1", "start task")
             try {
-                for (i in 1..2) {
+                for (i in 1..5) {
+                    publishProgress(i)
                     TimeUnit.SECONDS.sleep(2)
                     if (isCancelled) break
                 }
@@ -83,15 +84,10 @@ class MyFragment : Fragment() {
             callbacks?.onCanceled()
         }
 
-        override fun onPostExecute(result: Unit?) {
-            callbacks?.let {
-                for (i in 0..4) {
-                    currentMessage++
-                    handler?.sendEmptyMessageDelayed(currentMessage, 2000)
-//                    handler?.sendEmptyMessage(currentMessage)
-                }
-            }
+        override fun onProgressUpdate(vararg values: Int?) {
+            handler?.sendEmptyMessage(values[0]!!)
         }
+
     }
 }
 
