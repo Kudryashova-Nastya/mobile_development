@@ -6,9 +6,9 @@ import com.example.hw6.model.nodes.entities.Node
 
 interface NodesRepository {
 
-    suspend fun getById(): Flow<Node?>
+    suspend fun getById(nodeId: Long): Flow<Node?>
 
-    suspend fun updateNodeColor(newColor: String)
+    suspend fun updateNodeColor(nodeId: Long, newColor: String)
 
     suspend fun createNode(addNewNode: AddNewNode)
 
