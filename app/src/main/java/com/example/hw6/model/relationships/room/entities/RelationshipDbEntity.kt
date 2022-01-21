@@ -35,11 +35,11 @@ data class RelationshipDbEntity(
     )
 
     companion object {
-        fun fromAddNewRelationship(addNewRelationship: AddNewRelationship): RelationshipDbEntity =
+        fun fromAddNewRelationship(relationship: AddNewRelationship): RelationshipDbEntity =
             RelationshipDbEntity(
                 id = 0,
-                parent = addNewRelationship.parent,
-                child = addNewRelationship.child,
+                parent = relationship.parent,
+                child = relationship.child,
             )
     }
 }

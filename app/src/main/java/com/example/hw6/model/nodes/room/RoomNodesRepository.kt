@@ -19,7 +19,6 @@ class RoomNodesRepository(
         return nodesDao.getById(nodeId).map { nodeDbEntity -> nodeDbEntity?.toNode() }
     }
 
-
     override suspend fun updateNodeColor(nodeId: Long, newColor: String) {
         nodesDao.updateColor(NodeUpdateColorTuple(nodeId, newColor))
     }
