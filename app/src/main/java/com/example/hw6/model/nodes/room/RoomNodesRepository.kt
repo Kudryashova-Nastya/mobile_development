@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class RoomNodesRepository(
-    private val nodesDao: NodesDao,
+    private val nodesDao: NodesDao
 //    private val appSettings: AppSettings,
 //    private val ioDispatcher: CoroutineDispatcher
 ) : NodesRepository {

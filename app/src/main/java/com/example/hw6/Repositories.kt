@@ -15,28 +15,13 @@ import android.app.Application
 //import com.example.hw6.model.settings.AppSettings
 //import com.example.hw6.model.settings.SharedPreferencesAppSettings
 
-// не работает(((((((((((
-class App : Application() {
-    var database: AppDatabase? = null
-        private set
-
-    override fun onCreate() {
-        super.onCreate()
-        instance = this
-        database = Room.databaseBuilder(this, AppDatabase::class.java, "database")
-            .build()
-    }
-
-    companion object {
-        var instance: App? = null
-    }
-}
 
 
 
 
-//object Repositories {
-//
+
+object Repositories {
+
 //    private lateinit var applicationContext: Context
 //
 //    // -- stuffs
@@ -46,22 +31,22 @@ class App : Application() {
 //            .build()
 //    }
 //
-//    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+////    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 //
-//    private val appSettings: AppSettings by lazy {
-//        SharedPreferencesAppSettings(applicationContext)
-//    }
+////    private val appSettings: AppSettings by lazy {
+////        SharedPreferencesAppSettings(applicationContext)
+////    }
 //
 //    // --- repositories
 //
 //    val nodesRepository: NodesRepository by lazy {
-//        RoomNodesRepository(database.getNodesDao(), appSettings, ioDispatcher)
-////        RoomNodesRepository(database.getNodesDao())
+////        RoomNodesRepository(database.getNodesDao(), appSettings, ioDispatcher)
+//        RoomNodesRepository(database.getNodesDao())
 //    }
 //
 //    val relationshipsRepository: RelationshipsRepository by lazy {
-//        RoomRelationshipsRepository(nodesRepository, database.getRelationshipsDao(), ioDispatcher)
-////        RoomRelationshipsRepository(database.getRelationshipsDao())
+////        RoomRelationshipsRepository(nodesRepository, database.getRelationshipsDao(), ioDispatcher)
+//        RoomRelationshipsRepository(database.getRelationshipsDao())
 //    }
 //
 //    /**
@@ -71,6 +56,6 @@ class App : Application() {
 //    fun init(context: Context) {
 //        applicationContext = context
 //    }
-//
-//
-//}
+
+
+}
