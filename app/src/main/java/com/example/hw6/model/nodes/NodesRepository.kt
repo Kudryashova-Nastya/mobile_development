@@ -8,7 +8,7 @@ interface NodesRepository {
 
     suspend fun getById(nodeId: Long): Flow<Node?>
 
-    suspend fun updateNodeColor(nodeId: Long, newColor: String)
+    suspend fun getAll(): Flow<List<Node?>>
 
     suspend fun createNode(addNewNode: AddNewNode)
 

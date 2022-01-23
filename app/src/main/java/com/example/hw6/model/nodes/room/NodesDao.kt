@@ -10,8 +10,8 @@ import com.example.hw6.model.nodes.room.entities.*
 @Dao
 interface NodesDao {
 
-    @Update(entity = NodeDbEntity::class)
-    suspend fun updateColor(node: NodeUpdateColorTuple)
+    @Query("SELECT * FROM Node")
+    fun getAll(): Flow<List<NodeDbEntity?>>
 
     @Insert(entity = NodeDbEntity::class)
     suspend fun createNode(NodeDbEntity: NodeDbEntity)

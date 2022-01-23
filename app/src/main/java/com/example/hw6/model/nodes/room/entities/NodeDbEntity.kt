@@ -11,20 +11,17 @@ import com.example.hw6.model.nodes.entities.*
 )
 data class NodeDbEntity (
     @PrimaryKey(autoGenerate = true) val id: Long,
-    @ColumnInfo(name = "value") val value: Int,
-    @ColumnInfo(name = "color") val color: String
+    @ColumnInfo(name = "value") val value: Int
     ) {
     fun toNode(): Node = Node(
         id = id,
-        value = value,
-        color = color
+        value = value
     )
 
     companion object {
         fun fromAddNewNode(addNewNode:AddNewNode): NodeDbEntity = NodeDbEntity(
             id = 0,
-            value = addNewNode.value,
-            color = "white"
+            value = addNewNode.value
         )
     }
 }

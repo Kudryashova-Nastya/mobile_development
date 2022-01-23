@@ -5,7 +5,6 @@ import com.example.hw6.model.nodes.NodesRepository
 import com.example.hw6.model.nodes.entities.AddNewNode
 import com.example.hw6.model.nodes.entities.Node
 import com.example.hw6.model.nodes.room.entities.NodeDbEntity
-import com.example.hw6.model.nodes.room.entities.NodeUpdateColorTuple
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -19,15 +18,17 @@ class RoomNodesRepository(
         return nodesDao.getById(nodeId).map { nodeDbEntity -> nodeDbEntity?.toNode() }
     }
 
-    override suspend fun updateNodeColor(nodeId: Long, newColor: String) {
-        nodesDao.updateColor(NodeUpdateColorTuple(nodeId, newColor))
+    override suspend fun getAll(): Flow<List<Node?>> {
+        return nodesDao.getAll().map { node ->
+            node.map { nodeDbEntity -> nodeDbEntity?.toNode() }
+        }
     }
 
     override suspend fun createNode(addNewNode: AddNewNode) {
-        try{
+        try {
             val entity = NodeDbEntity.fromAddNewNode(addNewNode)
             nodesDao.createNode(entity)
-        } catch(e: SQLiteConstraintException) {
+        } catch (e: SQLiteConstraintException) {
             val appException = RuntimeException()
             appException.initCause(e)
             throw appException
