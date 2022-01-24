@@ -9,11 +9,11 @@ import com.example.hw6.model.nodes.room.entities.NodeDbEntity
 import com.example.hw6.model.relationships.room.RelationshipsDao
 import com.example.hw6.model.relationships.room.entities.RelationshipDbEntity
 
-//@Database(entities = [NodeDbEntity::class, RelationshipDbEntity::class], version = 1)
-@Database(entities = [NodeDbEntity::class], version = 1)
+@Database(entities = [NodeDbEntity::class, RelationshipDbEntity::class], version = 3)
+//@Database(entities = [NodeDbEntity::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun getNodesDao(): NodesDao
-//    abstract fun getRelationshipsDao(): RelationshipsDao
+    abstract fun getRelationshipsDao(): RelationshipsDao
 
     companion object {
         @Volatile

@@ -28,8 +28,8 @@ import kotlinx.android.parcel.Parcelize
 )
 data class RelationshipDbEntity(
     @PrimaryKey(autoGenerate = true) val id: Long,
-    @ColumnInfo(name = "parent") val parent: Int,
-    @ColumnInfo(name = "child") val child: Int
+    @ColumnInfo(name = "parent") val parent: Long,
+    @ColumnInfo(name = "child") val child: Long
 ) : Parcelable {
 
     companion object {

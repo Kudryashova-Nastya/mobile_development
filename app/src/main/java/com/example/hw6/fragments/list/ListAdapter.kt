@@ -25,7 +25,7 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = nodeList[position]
-        holder.itemView.textNode.text = "id: " + currentItem.id.toString() + " | value: " + currentItem.value
+        holder.itemView.textNode.text = "id: " + currentItem.id.toString() + " | value: " + currentItem.value.toString()
 
 //        holder.itemView.rowLayout.setOnClickListener {
 //            val action = ListFragmentDirections.actionListFragmentToUpdateFragment(currentItem)

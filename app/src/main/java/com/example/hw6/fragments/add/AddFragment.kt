@@ -1,6 +1,7 @@
 package com.example.hw6.fragments.add
 
 import android.os.Bundle
+import android.text.Editable
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -44,10 +45,10 @@ class AddFragment : Fragment() {
     }
 
     private fun insertDataToDatabase() {
-        val value = editValue.text.toString()
+        val value = editValue.text
 
         if (inputCheck(value)) {
-            val node = AddNewNode(value)
+            val node = AddNewNode(Integer.parseInt(value.toString()))
             mNodeViewModel.addNode(node)
             Toast.makeText(requireContext(), "Нода создана", Toast.LENGTH_LONG).show()
             findNavController().navigate(R.id.action_addFragment_to_listFragment)
@@ -56,7 +57,7 @@ class AddFragment : Fragment() {
         }
     }
 
-    private fun inputCheck(value: String): Boolean {
-        return !(TextUtils.isEmpty(value))
+    private fun inputCheck(value: Editable): Boolean {
+        return !(value.isEmpty())
     }
 }

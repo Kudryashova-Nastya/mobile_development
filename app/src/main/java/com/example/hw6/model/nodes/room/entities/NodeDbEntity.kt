@@ -15,7 +15,7 @@ import kotlinx.android.parcel.Parcelize
 )
 data class NodeDbEntity (
     @PrimaryKey(autoGenerate = true) val id: Long,
-    @ColumnInfo(name = "value") val value: String
+    @ColumnInfo(name = "value") val value: Int
 ) : Parcelable {
 
     companion object {
