@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Hw6"
         android:fullBackupOnly="true"
-        android:name=".App">
+        >
         <activity
             android:name=".MainActivity"
             android:exported="true">

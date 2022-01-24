@@ -1,27 +1,36 @@
 package com.example.hw6
 
 import android.content.Context
-import androidx.room.Room
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import com.example.hw6.model.nodes.NodesRepository
 import com.example.hw6.model.nodes.room.RoomNodesRepository
 import com.example.hw6.model.relationships.RelationshipsRepository
 import com.example.hw6.model.relationships.room.RoomRelationshipsRepository
 import com.example.hw6.model.room.AppDatabase
 
-import android.app.Application
-
 //import com.example.hw6.model.settings.AppSettings
 //import com.example.hw6.model.settings.SharedPreferencesAppSettings
 
 
+class Repositories {
+
+//    val readAllData: LiveData<List<Node>> = dao.getAll()
+
+    private lateinit var applicationContext: Context
+
+    private val database: AppDatabase = AppDatabase.getDatabase(applicationContext)
+
+    val nodesRepository: NodesRepository by lazy {
+        RoomNodesRepository(database.getNodesDao())
+    }
+
+    val relationshipsRepository: RelationshipsRepository by lazy {
+        RoomRelationshipsRepository(database.getRelationshipsDao())
+    }
+}
 
 
-
-
-object Repositories {
-
+//object Repositories {
+//
 //    private lateinit var applicationContext: Context
 //
 //    // -- stuffs
@@ -56,6 +65,6 @@ object Repositories {
 //    fun init(context: Context) {
 //        applicationContext = context
 //    }
-
-
-}
+//
+//
+//}
