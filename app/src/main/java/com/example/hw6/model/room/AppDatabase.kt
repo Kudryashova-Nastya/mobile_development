@@ -9,35 +9,29 @@ import com.example.hw6.model.nodes.room.entities.NodeDbEntity
 import com.example.hw6.model.relationships.room.RelationshipsDao
 import com.example.hw6.model.relationships.room.entities.RelationshipDbEntity
 
-//@Database(
-//    version = 1,
-//    entities = [NodeDbEntity::class, RelationshipDbEntity::class]
-//)
-//abstract class AppDatabase : RoomDatabase() {
-//    abstract fun getNodesDao(): NodesDao
-//    abstract fun getRelationshipsDao(): RelationshipsDao
-//}
-
-@Database(entities = [NodeDbEntity::class, RelationshipDbEntity::class], version = 1)
-//@TypeConverters(Converter::class)
+//@Database(entities = [NodeDbEntity::class, RelationshipDbEntity::class], version = 1)
+@Database(entities = [NodeDbEntity::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
-    //    abstract fun dao(): Dao
     abstract fun getNodesDao(): NodesDao
-    abstract fun getRelationshipsDao(): RelationshipsDao
+//    abstract fun getRelationshipsDao(): RelationshipsDao
 
     companion object {
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
         fun getDatabase(context: Context): AppDatabase {
-            return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
+            val tempInstance = INSTANCE
+            if (tempInstance != null) {
+                return tempInstance
+            }
+            synchronized(this) {
+                var instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
                     "database"
-                ).fallbackToDestructiveMigration().build()
+                ).build()
                 INSTANCE = instance
-                instance
+                return instance
             }
         }
     }

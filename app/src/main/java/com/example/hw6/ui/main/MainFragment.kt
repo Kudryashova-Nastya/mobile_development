@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.example.hw6.R
 
 class MainFragment : Fragment() {
@@ -27,6 +28,16 @@ class MainFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel.init()
+        val textView = view.findViewById<TextView>(R.id.message)
+        viewModel.liveData.observe(viewLifecycleOwner) {
+            textView.text = it.toString()
+        }
     }
 
 }

@@ -1,6 +1,7 @@
 package com.example.hw6.model.relationships.room
 
 import android.database.sqlite.SQLiteConstraintException
+import androidx.lifecycle.LiveData
 import com.example.hw6.model.relationships.RelationshipsRepository
 import com.example.hw6.model.relationships.entities.AddNewRelationship
 import com.example.hw6.model.relationships.entities.Relationship
@@ -11,18 +12,12 @@ import kotlinx.coroutines.flow.map
 class RoomRelationshipsRepository(
     private val relationshipsDao: RelationshipsDao,
 ) : RelationshipsRepository {
-    override suspend fun getParents(relationshipId: Long): Flow<List<Relationship?>?> {
+    override suspend fun getParents(relationshipId: Long): LiveData<List<RelationshipDbEntity?>> {
         return relationshipsDao.getParentsById(relationshipId)
-            .map { relationship ->
-                relationship?.map { relationshipDbEntity -> relationshipDbEntity?.toRelationship() }
-            }
     }
 
-    override suspend fun getChildren(relationshipId: Long): Flow<List<Relationship?>?> {
+    override suspend fun getChildren(relationshipId: Long): LiveData<List<RelationshipDbEntity?>> {
         return relationshipsDao.getChildrenById(relationshipId)
-            .map { relationship ->
-                relationship?.map { relationshipDbEntity -> relationshipDbEntity?.toRelationship() }
-            }
     }
 
     override suspend fun deleteRelationship(relationshipId: Long) {

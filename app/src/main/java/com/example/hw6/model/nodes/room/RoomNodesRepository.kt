@@ -1,28 +1,25 @@
 package com.example.hw6.model.nodes.room
 
 import android.database.sqlite.SQLiteConstraintException
+import androidx.lifecycle.LiveData
 import com.example.hw6.model.nodes.NodesRepository
 import com.example.hw6.model.nodes.entities.AddNewNode
-import com.example.hw6.model.nodes.entities.Node
 import com.example.hw6.model.nodes.room.entities.NodeDbEntity
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 
 class RoomNodesRepository(
     private val nodesDao: NodesDao
-//    private val appSettings: AppSettings,
-//    private val ioDispatcher: CoroutineDispatcher
 ) : NodesRepository {
 
-    override suspend fun getById(nodeId: Long): Flow<Node?> {
-        return nodesDao.getById(nodeId).map { nodeDbEntity -> nodeDbEntity?.toNode() }
+    override suspend fun getById(nodeId: Long): LiveData<NodeDbEntity?> {
+        return nodesDao.getById(nodeId)
     }
 
-    override suspend fun getAll(): Flow<List<Node?>> {
-        return nodesDao.getAll().map { node ->
-            node.map { nodeDbEntity -> nodeDbEntity?.toNode() }
-        }
+    override suspend fun getAll(): LiveData<List<NodeDbEntity?>> {
+        return nodesDao.getAll()
     }
+
+    val readAllData: LiveData<List<NodeDbEntity?>> = nodesDao.getAll()
+
 
     override suspend fun createNode(addNewNode: AddNewNode) {
         try {

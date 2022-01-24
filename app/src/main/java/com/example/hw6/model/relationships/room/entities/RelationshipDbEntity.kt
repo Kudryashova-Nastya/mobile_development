@@ -1,9 +1,12 @@
 package com.example.hw6.model.relationships.room.entities
 
+import android.os.Parcelable
 import androidx.room.*
 import com.example.hw6.model.nodes.room.entities.NodeDbEntity
 import com.example.hw6.model.relationships.entities.*
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Entity(
     tableName = "Relationship",
     foreignKeys = [
@@ -27,12 +30,7 @@ data class RelationshipDbEntity(
     @PrimaryKey(autoGenerate = true) val id: Long,
     @ColumnInfo(name = "parent") val parent: Int,
     @ColumnInfo(name = "child") val child: Int
-) {
-    fun toRelationship(): Relationship = Relationship(
-        id = id,
-        parent = parent,
-        child = child
-    )
+) : Parcelable {
 
     companion object {
         fun fromAddNewRelationship(relationship: AddNewRelationship): RelationshipDbEntity =

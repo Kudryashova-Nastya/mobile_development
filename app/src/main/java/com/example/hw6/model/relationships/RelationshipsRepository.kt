@@ -1,15 +1,15 @@
 package com.example.hw6.model.relationships
 
-import com.example.hw6.model.nodes.entities.AddNewNode
+import androidx.lifecycle.LiveData
 import com.example.hw6.model.relationships.entities.AddNewRelationship
-import com.example.hw6.model.relationships.entities.Relationship
+import com.example.hw6.model.relationships.room.entities.RelationshipDbEntity
 import kotlinx.coroutines.flow.Flow
 
 interface RelationshipsRepository {
 
-    suspend fun getParents(relationshipId: Long): Flow<List<Relationship?>?>
+    suspend fun getParents(relationshipId: Long): LiveData<List<RelationshipDbEntity?>>
 
-    suspend fun getChildren(relationshipId: Long): Flow<List<Relationship?>?>
+    suspend fun getChildren(relationshipId: Long): LiveData<List<RelationshipDbEntity?>>
 
     suspend fun deleteRelationship(relationshipId: Long)
 

@@ -15,17 +15,17 @@ class Repositories {
 
 //    val readAllData: LiveData<List<Node>> = dao.getAll()
 
-    private lateinit var applicationContext: Context
-
-    private val database: AppDatabase = AppDatabase.getDatabase(applicationContext)
-
-    val nodesRepository: NodesRepository by lazy {
-        RoomNodesRepository(database.getNodesDao())
-    }
-
-    val relationshipsRepository: RelationshipsRepository by lazy {
-        RoomRelationshipsRepository(database.getRelationshipsDao())
-    }
+//    private lateinit var applicationContext: Context
+//
+//    private val database: AppDatabase = AppDatabase.getDatabase(applicationContext)
+//
+//    val nodesRepository: NodesRepository by lazy {
+//        RoomNodesRepository(database.getNodesDao())
+//    }
+//
+//    val relationshipsRepository: RelationshipsRepository by lazy {
+//        RoomRelationshipsRepository(database.getRelationshipsDao())
+//    }
 }
 
 
