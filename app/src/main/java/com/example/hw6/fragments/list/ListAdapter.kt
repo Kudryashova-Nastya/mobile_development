@@ -16,7 +16,9 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.node, parent, false))
+        return MyViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.node, parent, false)
+        )
     }
 
     override fun getItemCount(): Int {
@@ -25,12 +27,14 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = nodeList[position]
-        holder.itemView.textNode.text = "id: " + currentItem.id.toString() + " | value: " + currentItem.value.toString()
+        holder.itemView.textNode.text =
+            "id: " + currentItem.id.toString() + " | value: " + currentItem.value.toString()
 
-//        holder.itemView.rowLayout.setOnClickListener {
-//            val action = ListFragmentDirections.actionListFragmentToUpdateFragment(currentItem)
-//            holder.itemView.findNavController().navigate(action)
-//        }
+        holder.itemView.rowLayout.setOnClickListener {
+            val action =
+                ListFragmentDirections.actionListFragmentToRelationshipFragment(currentItem)
+            holder.itemView.findNavController().navigate(action)
+        }
     }
 
     fun setData(node: List<NodeDbEntity>) {

@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_listFragment_to_addFragment"
             app:destination="@id/addFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_relationshipFragment"
+            app:destination="@id/relationshipFragment" />
     </fragment>
     <fragment
         android:id="@+id/addFragment"
@@ -20,6 +23,18 @@
         tools:layout="@layout/fragment_add" >
         <action
             android:id="@+id/action_addFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/relationshipFragment"
+        android:name="com.example.hw6.fragments.relationship.RelationshipFragment"
+        android:label="fragment_relationship"
+        tools:layout="@layout/fragment_relationship" >
+        <argument
+            android:name="currentNode"
+            app:argType="com.example.hw6.model.nodes.room.entities.NodeDbEntity" />
+        <action
+            android:id="@+id/action_relationshipFragment_to_listFragment"
             app:destination="@id/listFragment" />
     </fragment>
 </navigation>
