@@ -18,12 +18,12 @@ class NodeViewModel(application: Application) : AndroidViewModel(application) {
     init {
         val nodesDAO = AppDatabase.getDatabase(application).getNodesDao()
         repository = RoomNodesRepository(nodesDAO)
-//        getAll = nodesDAO.getAll()
-        readAllData = repository.readAllData
+        readAllData = nodesDAO.getAll()
+//        readAllData = repository.readAllData
     }
 
 
-    fun addNode(node: AddNewNode){
+    fun addNode(node: AddNewNode) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.createNode(node)
         }

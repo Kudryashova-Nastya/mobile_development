@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.hw6.databinding.MainActivityBinding
-import com.example.hw6.ui.main.MainFragment
 
 class MainActivity : AppCompatActivity() {
 

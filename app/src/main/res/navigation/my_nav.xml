@@ -28,7 +28,7 @@
     <fragment
         android:id="@+id/relationshipFragment"
         android:name="com.example.hw6.fragments.relationship.RelationshipFragment"
-        android:label="fragment_relationship"
+        android:label="Семейное древо"
         tools:layout="@layout/fragment_relationship" >
         <argument
             android:name="currentNode"

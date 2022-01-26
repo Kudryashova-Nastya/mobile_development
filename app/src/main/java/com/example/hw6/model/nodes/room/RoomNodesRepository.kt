@@ -18,7 +18,7 @@ class RoomNodesRepository(
         return nodesDao.getAll()
     }
 
-    val readAllData: LiveData<List<NodeDbEntity?>> = nodesDao.getAll()
+//    val readAllData: LiveData<List<NodeDbEntity?>> = nodesDao.getAll()
 
 
     override suspend fun createNode(addNewNode: AddNewNode) {
