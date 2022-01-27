@@ -13,23 +13,23 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class RelationshipViewModel(application: Application) : AndroidViewModel(application) {
-    //    val readParentsData: LiveData<List<RelationshipDbEntity?>>
+    val readAllData: LiveData<List<RelationshipDbEntity?>>
     private val repository: RoomRelationshipsRepository
     private val relationshipsDAO: RelationshipsDao =
         AppDatabase.getDatabase(application).getRelationshipsDao()
 
     init {
         repository = RoomRelationshipsRepository(relationshipsDAO)
-//        readParentsData = repository.getParents(1)
+        readAllData = relationshipsDAO.getAll()
     }
 
-    fun readParents(relationshipId: Long) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val readParentsData = relationshipsDAO.getParentsById(relationshipId)
-            readParentsData
-        }
+    fun readParents(relationshipId: Long): LiveData<List<RelationshipDbEntity?>> {
+        return relationshipsDAO.getParentsById(relationshipId)
     }
 
+    fun readChildren(relationshipId: Long): LiveData<List<RelationshipDbEntity?>> {
+        return relationshipsDAO.getChildrenById(relationshipId)
+    }
 
     fun addRelationship(relationship: AddNewRelationship) {
         viewModelScope.launch(Dispatchers.IO) {

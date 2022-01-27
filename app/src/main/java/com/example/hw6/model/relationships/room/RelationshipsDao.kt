@@ -4,11 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import kotlinx.coroutines.flow.Flow
 import com.example.hw6.model.relationships.room.entities.*
 
 @Dao
 interface RelationshipsDao {
+
+    @Query("SELECT * FROM Relationship")
+    fun getAll(): LiveData<List<RelationshipDbEntity?>>
 
     @Insert(entity = RelationshipDbEntity::class)
     suspend fun createRelationship(RelationshipDbEntity: RelationshipDbEntity)

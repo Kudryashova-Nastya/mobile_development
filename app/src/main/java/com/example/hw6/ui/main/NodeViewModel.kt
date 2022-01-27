@@ -1,6 +1,7 @@
 package com.example.hw6.ui.main
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
@@ -19,7 +20,6 @@ class NodeViewModel(application: Application) : AndroidViewModel(application) {
         val nodesDAO = AppDatabase.getDatabase(application).getNodesDao()
         repository = RoomNodesRepository(nodesDAO)
         readAllData = nodesDAO.getAll()
-//        readAllData = repository.readAllData
     }
 
 

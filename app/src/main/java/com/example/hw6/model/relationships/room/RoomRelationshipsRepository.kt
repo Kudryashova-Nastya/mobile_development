@@ -4,14 +4,16 @@ import android.database.sqlite.SQLiteConstraintException
 import androidx.lifecycle.LiveData
 import com.example.hw6.model.relationships.RelationshipsRepository
 import com.example.hw6.model.relationships.entities.AddNewRelationship
-import com.example.hw6.model.relationships.entities.Relationship
 import com.example.hw6.model.relationships.room.entities.RelationshipDbEntity
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 
 class RoomRelationshipsRepository(
     private val relationshipsDao: RelationshipsDao,
 ) : RelationshipsRepository {
+
+    override suspend fun getAll(): LiveData<List<RelationshipDbEntity?>> {
+        return relationshipsDao.getAll()
+    }
+
     override suspend fun getParents(relationshipId: Long): LiveData<List<RelationshipDbEntity?>> {
         return relationshipsDao.getParentsById(relationshipId)
     }
