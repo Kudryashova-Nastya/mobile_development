@@ -12,7 +12,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hw6.R
+import com.example.hw6.model.relationships.room.entities.RelationshipDbEntity
 import com.example.hw6.ui.main.NodeViewModel
+import com.example.hw6.ui.main.RelationshipViewModel
 import kotlinx.android.synthetic.main.fragment_relationship.view.*
 
 
@@ -21,6 +23,7 @@ class RelationshipFragment : Fragment() {
     private val args by navArgs<RelationshipFragmentArgs>()
 
     private lateinit var mNodeViewModel: NodeViewModel
+    private lateinit var mRelationshipViewModel: RelationshipViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +44,15 @@ class RelationshipFragment : Fragment() {
         mNodeViewModel.readAllData.observe(viewLifecycleOwner, { node ->
             adapter.setData(node)
         })
+
+        mRelationshipViewModel = ViewModelProvider(this)[RelationshipViewModel::class.java]
+        mRelationshipViewModel.readAllData.observe(
+            viewLifecycleOwner,
+            { relationship ->
+                adapter.setRelationship(relationship as List<RelationshipDbEntity>)
+            }
+        )
+
         view.btn_children.setBackgroundColor(Color.LTGRAY)
 
 
@@ -51,6 +63,12 @@ class RelationshipFragment : Fragment() {
             mNodeViewModel.readAllData.observe(viewLifecycleOwner, { node ->
                 adapter.setData(node)
             })
+            mRelationshipViewModel.readAllData.observe(
+                viewLifecycleOwner,
+                { relationship ->
+                    adapter.setRelationship(relationship as List<RelationshipDbEntity>)
+                }
+            )
             view.btn_children.setBackgroundColor(Color.LTGRAY)
             view.btn_parents.setBackgroundColor(Color.parseColor("#FF6200EE"))
         }
@@ -62,6 +80,12 @@ class RelationshipFragment : Fragment() {
             mNodeViewModel.readAllData.observe(viewLifecycleOwner, { node ->
                 adapter.setData(node)
             })
+            mRelationshipViewModel.readAllData.observe(
+                viewLifecycleOwner,
+                { relationship ->
+                    adapter.setRelationship(relationship as List<RelationshipDbEntity>)
+                }
+            )
 
             view.btn_parents.setBackgroundColor(Color.LTGRAY)
             view.btn_children.setBackgroundColor(Color.parseColor("#FF6200EE"))

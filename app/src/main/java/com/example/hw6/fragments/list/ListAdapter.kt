@@ -47,9 +47,7 @@ class ListAdapter() :
             if (currentItem.id in relationshipList.map { it -> it.child }) {
                 hasParents = true
             }
-        }
 
-        if (relationshipList.isNullOrEmpty().not()) {
             if (currentItem.id in relationshipList.map { it -> it.parent }) {
                 hasChildren = true
             }
