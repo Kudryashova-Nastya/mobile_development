@@ -2,7 +2,6 @@ package com.example.hw6.fragments.add
 
 import android.os.Bundle
 import android.text.Editable
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.hw6.R
 import com.example.hw6.model.nodes.entities.AddNewNode
-import com.example.hw6.model.nodes.room.entities.NodeDbEntity
 import com.example.hw6.ui.main.NodeViewModel
 import kotlinx.android.synthetic.main.fragment_add.*
 import kotlinx.android.synthetic.main.fragment_add.view.*
@@ -26,17 +24,9 @@ class AddFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_add, container, false)
 
-//        mNodeViewModel = ViewModelProvider(this, NodeViewModelFactory()).get(NodeViewModel::class.java)
-        mNodeViewModel = ViewModelProvider(this).get(NodeViewModel::class.java)
-//        val myViewModel: MyViewModel = ViewModelProviders.of(
-//            this,
-//            MyViewModelFactory(this.getApplication(), "my awesome param")
-//        ).get(
-//            MyViewModel::class.java
-//        )
+        mNodeViewModel = ViewModelProvider(this)[NodeViewModel::class.java]
 
         view.add_btn.setOnClickListener {
             insertDataToDatabase()

@@ -1,9 +1,9 @@
 package com.example.hw6.fragments.relationship
 
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
@@ -29,12 +29,6 @@ class RelationshipAdapter(
 
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        init {
-            itemView.setOnClickListener {
-                Toast.makeText(itemView.context, "тык-тык", Toast.LENGTH_SHORT)
-                    .show()
-            }
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -57,34 +51,40 @@ class RelationshipAdapter(
             holder.itemView.textRelationship2.text =
                 "id: " + currentItem?.id.toString() + " | value: " + currentItem?.value.toString()
 
+            // фильтрация
+            if (checkRelationship(currentItem, ourNode)) {
+//                holder.itemView.rowRelationshipLayout.visibility = GONE
+                holder.itemView.relationship.visibility = GONE
+            }
+
             if (checkRelationship(ourNode, currentItem)) {
                 holder.itemView.relationship.setBackgroundColor(Color.parseColor("#97F5A2"))
 
-//                holder.itemView.setOnClickListener {
-//                    var dialogDel = DeleteRelationFragment(ourNode, currentItem, childrenFilter)
-//                    dialogDel.show(fragment, "tag")
-//                    Toast.makeText(
-//                        holder.itemView.context,
-//                        "success #${position + 1}",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//
-//                }
+            } else {
+                holder.itemView.setOnClickListener {
+                    val dialogAdd = AddRelationshipFragment(ourNode, currentItem!!)
+                    dialogAdd.show(fragment, "show")
+                }
             }
-//            else {
-//                holder.itemView.setOnClickListener {
-//                    var dialogAdd = AddRelationFragment(ourNode, currentItem, childrenFilter)
-//                    dialogAdd.show(fragment, "tag")
-//                }
-//            }
         } else {
             holder.itemView.textRelationship1.text =
                 "id: " + currentItem?.id.toString() + " | value: " + currentItem?.value.toString()
             holder.itemView.textRelationship2.text =
                 "id: " + ourNode.id.toString() + " | value: " + ourNode.value.toString()
 
+            // фильтрация
+            if (checkRelationship(ourNode, currentItem)) {
+//                holder.itemView.rowRelationshipLayout.visibility = GONE
+                holder.itemView.relationship.visibility = GONE
+            }
+
             if (checkRelationship(currentItem, ourNode)) {
                 holder.itemView.relationship.setBackgroundColor(Color.parseColor("#97F5A2"))
+            } else {
+                holder.itemView.setOnClickListener {
+                    val dialogAdd = AddRelationshipFragment(currentItem!!, ourNode)
+                    dialogAdd.show(fragment, "show")
+                }
             }
         }
     }
@@ -109,7 +109,6 @@ class RelationshipAdapter(
 
     fun setData(node: List<NodeDbEntity?>) {
         this.nodeList = node.filter { it!!.id != ourNode.id }
-//        this.nodeList = node as MutableList<NodeDbEntity?>
         notifyDataSetChanged()
     }
 
