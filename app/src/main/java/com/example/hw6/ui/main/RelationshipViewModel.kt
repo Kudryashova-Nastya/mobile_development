@@ -23,13 +23,13 @@ class RelationshipViewModel(application: Application) : AndroidViewModel(applica
         readAllData = relationshipsDAO.getAll()
     }
 
-    fun readParents(relationshipId: Long): LiveData<List<RelationshipDbEntity?>> {
-        return relationshipsDAO.getParentsById(relationshipId)
-    }
+//    fun readParents(relationshipId: Long): LiveData<List<RelationshipDbEntity?>> {
+//        return relationshipsDAO.getParentsById(relationshipId)
+//    }
 
-    fun readChildren(relationshipId: Long): LiveData<List<RelationshipDbEntity?>> {
-        return relationshipsDAO.getChildrenById(relationshipId)
-    }
+//    fun readChildren(relationshipId: Long): LiveData<List<RelationshipDbEntity?>> {
+//        return relationshipsDAO.getChildrenById(relationshipId)
+//    }
 
     fun addRelationship(relationship: AddNewRelationship) {
         viewModelScope.launch(Dispatchers.IO) {

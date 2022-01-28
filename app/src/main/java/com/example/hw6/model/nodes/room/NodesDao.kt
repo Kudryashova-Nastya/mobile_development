@@ -16,6 +16,6 @@ interface NodesDao {
     @Insert(entity = NodeDbEntity::class)
     suspend fun createNode(NodeDbEntity: NodeDbEntity)
 
-    @Query("SELECT * FROM Node WHERE id = :nodeId")
-    fun getById(nodeId: Long): LiveData<NodeDbEntity?>
+//    @Query("SELECT * FROM Node WHERE id = :nodeId")
+//    fun getById(nodeId: Long): LiveData<NodeDbEntity?>
 }

@@ -11,7 +11,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 @Entity(
     tableName = "Node",
-    indices = [Index("value", unique = true)]
+    indices = [Index("value")]
 )
 data class NodeDbEntity (
     @PrimaryKey(autoGenerate = true) val id: Long,

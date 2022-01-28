@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.relationship.RelationshipFragment">
+    tools:context=".fragments.relationship.RelationshipFragment"
+    android:orientation="vertical">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/relationships_container"
@@ -25,10 +26,10 @@
             android:id="@+id/btn_children"
             android:layout_width="161dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginBottom="16dp"
-            android:text="Дети"
+            android:layout_marginHorizontal="@dimen/margin_horizont"
+            android:layout_marginStart="@dimen/margin_max"
+            android:layout_marginBottom="@dimen/margin_mid"
+            android:text="@string/children_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_parents"
             app:layout_constraintHorizontal_bias="0.28"
@@ -38,10 +39,10 @@
             android:id="@+id/btn_parents"
             android:layout_width="161dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="16dp"
-            android:text="Родители"
+            android:layout_marginHorizontal="@dimen/margin_horizont"
+            android:layout_marginEnd="@dimen/margin_max"
+            android:layout_marginBottom="@dimen/margin_mid"
+            android:text="@string/parents_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 

@@ -10,16 +10,13 @@ class RoomNodesRepository(
     private val nodesDao: NodesDao
 ) : NodesRepository {
 
-    override suspend fun getById(nodeId: Long): LiveData<NodeDbEntity?> {
-        return nodesDao.getById(nodeId)
-    }
+//    override suspend fun getById(nodeId: Long): LiveData<NodeDbEntity?> {
+//        return nodesDao.getById(nodeId)
+//    }
 
     override suspend fun getAll(): LiveData<List<NodeDbEntity?>> {
         return nodesDao.getAll()
     }
-
-//    val readAllData: LiveData<List<NodeDbEntity?>> = nodesDao.getAll()
-
 
     override suspend fun createNode(addNewNode: AddNewNode) {
         try {

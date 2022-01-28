@@ -2,4 +2,16 @@
     <string name="app_name">hw6</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="children_button">Дети</string>
+    <string name="parents_button">Родители</string>
+    <string name="add_rel">Добавить связь?</string>
+    <string name="cancel">Отмена</string>
+    <string name="ok">Ок</string>
+    <string name="del_rel">Удалить связь?</string>
+    <string name="add_node">Создание ноды</string>
+    <string name="add_node_but">Добавить</string>
+    <string name="add">add</string>
+    <string name="example">id: 1 | value : 1</string>
+    <string name="line">----</string>
+    <string name="example2">id: 2 | value : 2</string>
 </resources>

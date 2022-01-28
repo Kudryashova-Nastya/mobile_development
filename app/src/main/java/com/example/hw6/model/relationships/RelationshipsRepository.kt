@@ -10,9 +10,9 @@ interface RelationshipsRepository {
 
     suspend fun getAll(): LiveData<List<RelationshipDbEntity?>>
 
-    suspend fun getParents(relationshipId: Long): LiveData<List<RelationshipDbEntity?>>
+//    suspend fun getParents(relationshipId: Long): LiveData<List<RelationshipDbEntity?>>
 
-    suspend fun getChildren(relationshipId: Long): LiveData<List<RelationshipDbEntity?>>
+//    suspend fun getChildren(relationshipId: Long): LiveData<List<RelationshipDbEntity?>>
 
     suspend fun deleteRelationship(parentId: Long, childId: Long)
 

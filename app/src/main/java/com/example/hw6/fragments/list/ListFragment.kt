@@ -1,7 +1,6 @@
 package com.example.hw6.fragments.list
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,11 +29,8 @@ class ListFragment : Fragment() {
 
         mRelationshipViewModel = ViewModelProvider(this)[RelationshipViewModel::class.java]
 
-//        val adapter = ListAdapter(relationshipsDAO.getAll())
-//        val adapter = ListAdapter(mRelationshipViewModel.readAllData)
         val adapter = ListAdapter()
 
-//        Log.d("TAG1", mRelationshipViewModel.readAllData.value.toString())
 
         val recyclerView = view.recycleview
         recyclerView.adapter = adapter

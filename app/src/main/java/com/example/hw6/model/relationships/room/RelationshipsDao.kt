@@ -15,11 +15,11 @@ interface RelationshipsDao {
     @Insert(entity = RelationshipDbEntity::class)
     suspend fun createRelationship(RelationshipDbEntity: RelationshipDbEntity)
 
-    @Query("SELECT * FROM Relationship WHERE child = :nodeId")
-    fun getParentsById(nodeId: Long): LiveData<List<RelationshipDbEntity?>>
+//    @Query("SELECT * FROM Relationship WHERE child = :nodeId")
+//    fun getParentsById(nodeId: Long): LiveData<List<RelationshipDbEntity?>>
 
-    @Query("SELECT * FROM Relationship WHERE parent = :nodeId")
-    fun getChildrenById(nodeId: Long): LiveData<List<RelationshipDbEntity?>>
+//    @Query("SELECT * FROM Relationship WHERE parent = :nodeId")
+//    fun getChildrenById(nodeId: Long): LiveData<List<RelationshipDbEntity?>>
 
     @Query("DELETE FROM Relationship WHERE parent = :parentId AND child = :childId")
     fun deleteRelationship(parentId: Long, childId: Long)

@@ -14,13 +14,13 @@ class RoomRelationshipsRepository(
         return relationshipsDao.getAll()
     }
 
-    override suspend fun getParents(relationshipId: Long): LiveData<List<RelationshipDbEntity?>> {
-        return relationshipsDao.getParentsById(relationshipId)
-    }
+//    override suspend fun getParents(relationshipId: Long): LiveData<List<RelationshipDbEntity?>> {
+//        return relationshipsDao.getParentsById(relationshipId)
+//    }
 
-    override suspend fun getChildren(relationshipId: Long): LiveData<List<RelationshipDbEntity?>> {
-        return relationshipsDao.getChildrenById(relationshipId)
-    }
+//    override suspend fun getChildren(relationshipId: Long): LiveData<List<RelationshipDbEntity?>> {
+//        return relationshipsDao.getChildrenById(relationshipId)
+//    }
 
     override suspend fun deleteRelationship(parentId: Long, childId: Long) {
         relationshipsDao.deleteRelationship(parentId,childId)
