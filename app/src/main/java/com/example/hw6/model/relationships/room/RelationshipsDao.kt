@@ -21,6 +21,6 @@ interface RelationshipsDao {
     @Query("SELECT * FROM Relationship WHERE parent = :nodeId")
     fun getChildrenById(nodeId: Long): LiveData<List<RelationshipDbEntity?>>
 
-    @Query("DELETE FROM Relationship WHERE id = :relationshipId")
-    fun deleteById(relationshipId: Long)
+    @Query("DELETE FROM Relationship WHERE parent = :parentId AND child = :childId")
+    fun deleteRelationship(parentId: Long, childId: Long)
 }

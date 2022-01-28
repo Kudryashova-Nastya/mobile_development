@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hw6.R
@@ -34,7 +33,6 @@ class RelationshipAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.relationship, parent, false)
         return MyViewHolder(v)
-
     }
 
     override fun getItemCount(): Int {
@@ -53,14 +51,20 @@ class RelationshipAdapter(
 
             // фильтрация
             if (checkRelationship(currentItem, ourNode)) {
-//                holder.itemView.rowRelationshipLayout.visibility = GONE
+                holder.itemView.rowRelationshipLayout.visibility = GONE
                 holder.itemView.relationship.visibility = GONE
             }
 
             if (checkRelationship(ourNode, currentItem)) {
                 holder.itemView.relationship.setBackgroundColor(Color.parseColor("#97F5A2"))
-
+                holder.itemView.setOnClickListener {
+                    val dialogDel = DeleteRelationshipFragment(ourNode, currentItem!!)
+                    dialogDel.show(fragment, "show")
+//                    Toast.makeText(holder.itemView.context, "успешно удалено", Toast.LENGTH_SHORT).show()
+                    notifyDataSetChanged()
+                }
             } else {
+                holder.itemView.relationship.setBackgroundColor(Color.WHITE)
                 holder.itemView.setOnClickListener {
                     val dialogAdd = AddRelationshipFragment(ourNode, currentItem!!)
                     dialogAdd.show(fragment, "show")
@@ -74,13 +78,19 @@ class RelationshipAdapter(
 
             // фильтрация
             if (checkRelationship(ourNode, currentItem)) {
-//                holder.itemView.rowRelationshipLayout.visibility = GONE
+                holder.itemView.rowRelationshipLayout.visibility = GONE
                 holder.itemView.relationship.visibility = GONE
             }
 
             if (checkRelationship(currentItem, ourNode)) {
                 holder.itemView.relationship.setBackgroundColor(Color.parseColor("#97F5A2"))
+                holder.itemView.setOnClickListener {
+                    val dialogDel = DeleteRelationshipFragment(currentItem!!, ourNode)
+                    dialogDel.show(fragment, "show")
+                    notifyDataSetChanged()
+                }
             } else {
+                holder.itemView.relationship.setBackgroundColor(Color.WHITE)
                 holder.itemView.setOnClickListener {
                     val dialogAdd = AddRelationshipFragment(currentItem!!, ourNode)
                     dialogAdd.show(fragment, "show")

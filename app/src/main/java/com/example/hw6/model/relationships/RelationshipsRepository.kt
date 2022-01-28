@@ -14,7 +14,7 @@ interface RelationshipsRepository {
 
     suspend fun getChildren(relationshipId: Long): LiveData<List<RelationshipDbEntity?>>
 
-    suspend fun deleteRelationship(relationshipId: Long)
+    suspend fun deleteRelationship(parentId: Long, childId: Long)
 
     suspend fun createRelationship(addNewRelationship: AddNewRelationship)
 }

@@ -36,4 +36,10 @@ class RelationshipViewModel(application: Application) : AndroidViewModel(applica
             repository.createRelationship(relationship)
         }
     }
+
+    fun deleteRelationship(parentId: Long, childId: Long) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteRelationship(parentId, childId)
+        }
+    }
 }

@@ -22,8 +22,8 @@ class RoomRelationshipsRepository(
         return relationshipsDao.getChildrenById(relationshipId)
     }
 
-    override suspend fun deleteRelationship(relationshipId: Long) {
-        relationshipsDao.deleteById(relationshipId)
+    override suspend fun deleteRelationship(parentId: Long, childId: Long) {
+        relationshipsDao.deleteRelationship(parentId,childId)
     }
 
     override suspend fun createRelationship(addNewRelationship: AddNewRelationship) {
